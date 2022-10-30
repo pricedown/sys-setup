@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-challenger-deep
+(setq doom-theme 'doom-spacegrey
 doom-font (font-spec :family "Jetbrains Mono" :size 17 :weight 'medium))
 
 ;;(set-face-attribute 'default nil :height 140) ;; font size
@@ -47,18 +47,9 @@ doom-font (font-spec :family "Jetbrains Mono" :size 17 :weight 'medium))
 
 (setq-default indent-tabs-mode nil) ;; Setting tab width
 (setq-default tab-width 4)
-(setq c-set-style "k&r")
-(setq c-basic-offset 4)
-
+(setq c-default-style "k&r" c-basic-offset 4)
 
 (setq scroll-margin 4)
-
-(add-hook 'c-mode-common-hook 'c-guess-buffer) ;;ensures that tabs are applied as guessed per project
-(add-hook 'c++-mode-hook
-          (function (lambda ()
-                      (setq c-syntactic-indentation nil))))
-
-(setq c-default-style "stroustrup" c-basic-offset 4)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.

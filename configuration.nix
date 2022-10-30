@@ -105,7 +105,15 @@
   };
 
   fonts = {
-    fonts = with pkgs; [ atkinson-hyperlegible jetbrains-mono hack-font ];
+    fonts = with pkgs; [ fira atkinson-hyperlegible jetbrains-mono hack-font ];
+    enableDefaultFonts = true;
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Fira Sans Book" ];
+        sansSerif = [ "Fira Sans Book" ];
+        monospace = [ "Jetbrains Mono" ];
+      };
+    };
   };
 
   # User account
@@ -165,8 +173,7 @@
     rust-analyzer
     clang
     clang-tools
-    emacs28Packages.clang-format
-    cmake-format
+    # emacs28Packages.clang-format
     nixfmt
     rustfmt
 
