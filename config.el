@@ -33,7 +33,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-challenger-deep
-doom-font (font-spec :family "Jetbrains Mono" :size 16 :weight 'medium))
+doom-font (font-spec :family "Jetbrains Mono" :size 17 :weight 'medium))
 
 ;;(set-face-attribute 'default nil :height 140) ;; font size
 
@@ -45,9 +45,11 @@ doom-font (font-spec :family "Jetbrains Mono" :size 16 :weight 'medium))
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-(setq c-default-style "k&r" ;; Trying to set tab indent
-      c-basic-offset 4
-      indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil) ;; Setting tab width
+(setq-default tab-width 4)
+(setq c-set-style "k&r")
+(setq c-basic-offset 4)
+
 
 (setq scroll-margin 4)
 

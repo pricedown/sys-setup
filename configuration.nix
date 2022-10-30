@@ -147,7 +147,6 @@
     wget
     tmux # (for ssh)
     git
-    gh
     btop # system monitor
 
     # Programming
@@ -155,6 +154,8 @@
     gcc
     cargo
     cmake
+    cmake-format
+    cmake-language-server
     ghc
     haskellPackages.haskell-language-server
     haskellPackages.hoogle
