@@ -109,8 +109,8 @@
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Fira Sans Book" ];
-        sansSerif = [ "Fira Sans Book" ];
+        serif = [ "Atkinson Hyperlegible" ];
+        sansSerif = [ "Atkinson Hyperlegible" ];
         monospace = [ "Jetbrains Mono" ];
       };
     };
