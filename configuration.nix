@@ -18,7 +18,7 @@
   boot.loader.grub.configurationLimit = 15;
 
   # Networking
-  networking.hostName = "BT_MJ0CNPXG_TL"; # Define your hostname.
+  networking.hostName = "jmhi-pc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -40,6 +40,7 @@
 
   # Bashrc
   environment.interactiveShellInit = ''
+        export EDITOR="emacs"
       	alias rebuild='sudo nixos-rebuild switch --upgrade'
     	  alias nixconf='sudo nvim /etc/nixos/configuration.nix'
     	  alias vim='nvim'
@@ -70,6 +71,7 @@
             haskellPackages.xmonad
           ];
         };
+        awesome = { enable = false; };
       };
 
       libinput = {
@@ -92,7 +94,7 @@
     picom = {
       enable = true;
       vSync = false;
-      refreshRate = 120;
+      refreshRate = 240; # FIXME deprecated
       backend = "glx";
     };
   };
@@ -126,19 +128,24 @@
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    home-manager
+    # home-manager
     libinput
     dbus
+    wine
+    winetricks
+    proton-caller
 
     # Primary apps
     alacritty # terminal
     firefox # browser
     emacs # editor
-    neovim # TEMP fallback editor
+    neovim # fallback editor
     steam # games
-    protonvpn-cli # vpn
+    protonvpn-gui # vpn
+    transmission-qt # torrent tool
 
     # Desktop environment
+    awesome
     haskellPackages.xmonad
     haskellPackages.xmobar
     haskellPackages.xmonad-contrib
@@ -150,6 +157,7 @@
     nitrogen # background settings
     pavucontrol # volume settings
     flameshot # screenshot tool
+    slock # display locker
 
     # Sys tools
     wget
@@ -176,6 +184,7 @@
     # emacs28Packages.clang-format
     nixfmt
     rustfmt
+    nodePackages_latest.lua-fmt
 
   ];
 
