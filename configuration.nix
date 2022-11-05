@@ -132,7 +132,7 @@
     libinput
     dbus
     wine
-    winetricks
+    # winetricks
     proton-caller
 
     # Primary apps
@@ -184,7 +184,7 @@
     # emacs28Packages.clang-format
     nixfmt
     rustfmt
-    nodePackages_latest.lua-fmt
+    # nodePackages_latest.lua-fmt
 
   ];
 
