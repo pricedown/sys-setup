@@ -107,7 +107,19 @@
   };
 
   fonts = {
-    fonts = with pkgs; [ fira atkinson-hyperlegible jetbrains-mono hack-font ];
+    fonts = with pkgs; [
+      jetbrains-mono # the one and only
+
+      #reading
+      atkinson-hyperlegible
+      fira
+
+      #interface
+      hack-font
+      inter
+      ttf_bitstream_vera
+      montserrat
+    ];
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
