@@ -108,22 +108,26 @@
 
   fonts = {
     fonts = with pkgs; [
-      jetbrains-mono # the one and only
 
-      #reading
+      # Mono
+      jetbrains-mono
+      #fantasque-sans-mono
+
+      # Reading
       atkinson-hyperlegible
-      fira
+      #fira
 
-      #interface
-      hack-font
-      inter
-      ttf_bitstream_vera
+      # Interface
+      #ttf_bitstream_vera
       montserrat
+      #hack-font
+      iosevka
+      roboto
     ];
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Atkinson Hyperlegible" ];
+        serif = [ "Bitstream Vera Serif" ];
         sansSerif = [ "Atkinson Hyperlegible" ];
         monospace = [ "Jetbrains Mono" ];
       };
