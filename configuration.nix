@@ -71,7 +71,7 @@
             haskellPackages.xmonad
           ];
         };
-        awesome = { enable = false; };
+        awesome.enable = false;
       };
 
       libinput = {
@@ -152,7 +152,7 @@
 
     picom # compositor
     pkgs.xfce.thunar # file browser
-    dmenu # program launcher
+    rofi # program launcher
     lxappearance # theme settings
     nitrogen # background settings
     pavucontrol # volume settings

@@ -44,7 +44,7 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 --
 myNormalBorderColor = "#504945"
 
-myFocusedBorderColor = "#d3869b"
+myFocusedBorderColor = "#458588"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -53,8 +53,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
     -- launch a terminal
     [ ((modm, xK_Return), spawn $ XMonad.terminal conf),
-      -- launch dmenu
-      ((modm, xK_d), spawn "dmenu_run"),
+      -- launch dmenu/rofi
+      ((modm, xK_d), spawn "rofi -show run -show-icons"),
       -- launch gmrun
       ((modm .|. shiftMask, xK_p), spawn "gmrun"),
       -- close focused window
@@ -98,7 +98,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- Quit xmonad
       ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess)),
       -- Restart xmonad
-      ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart"),
+      ((modm .|. shiftMask, xK_r), spawn "xmonad --recompile; xmonad --restart"),
       -- Run xmessage with a summary of the default keybindings (useful for beginners)
       ((modm .|. shiftMask, xK_slash), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
     ]
@@ -156,7 +156,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = gaps [(U, 18), (R, 0)] $ Tall 1 (3 / 100) (1 / 2) ||| Full
+myLayout = gaps [(U, 18), (R, 0), (D, 0)] $ Tall 1 (3 / 100) (1 / 2) ||| Full
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall nmaster delta ratio
