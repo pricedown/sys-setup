@@ -53,6 +53,9 @@
       layout = "us";
       xkbVariant = "";
       # videoDrivers = [ "nvidia" ];
+      deviceSection = ''
+        Option "TearFree" "true"
+      '';
 
       displayManager = {
         lightdm.enable = true;
@@ -102,8 +105,8 @@
       shadowOpacity = 0.1;
       shadowExclude = [ "name ~= 'xmobar'" ];
 
-      fade = true;
-      fadeDelta = 5;
+      fade = false;
+      fadeDelta = 3;
       fadeSteps = [ 3.0e-2 3.0e-2 ];
       fadeExclude = [ "name ~= 'xmobar'" ];
     };
