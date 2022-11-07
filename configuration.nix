@@ -93,9 +93,19 @@
     };
     picom = {
       enable = true;
+      backend = "glx";
+
       vSync = false;
       refreshRate = 240; # FIXME deprecated
-      backend = "glx";
+
+      shadow = true;
+      shadowOpacity = 0.1;
+      shadowExclude = [ "name ~= 'xmobar'" ];
+
+      fade = true;
+      fadeDelta = 5;
+      fadeSteps = [ 3.0e-2 3.0e-2 ];
+      fadeExclude = [ "name ~= 'xmobar'" ];
     };
   };
 
