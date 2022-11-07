@@ -48,6 +48,11 @@
   '';
 
   services = {
+    locate.enable = true;
+    ntp.enable = true;
+    openssh.enable = true;
+    devmon.enable = true;
+
     xserver = {
       enable = true;
       layout = "us";
@@ -83,9 +88,6 @@
         # mouse.accelSpeed = "0";
       };
     };
-    locate.enable = true;
-    ntp.enable = true;
-    openssh.enable = true;
 
     pipewire = {
       enable = true;
@@ -172,6 +174,7 @@
     steam # games
     protonvpn-gui # vpn
     transmission-qt # torrent tool
+    ventoy-bin
 
     # Desktop environment
     awesome
