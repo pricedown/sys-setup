@@ -9,3 +9,4 @@ cp -r init.el ~/.doom.d/init.el
 cp -r config.el ~/.doom.d/config.el
 cp -r config.rasi ~/.config/rofi/config.rasi
 cp -r gruv.rasi ~/.config/rofi/gruv.rasi
+cp -r alacritty.yml ~/.config/alacritty/alacritty.yml
