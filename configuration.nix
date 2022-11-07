@@ -163,11 +163,15 @@
     # Desktop environment
     awesome
     haskellPackages.xmonad
+    haskellPackages.xmonad-dbus
+    # haskellPackages.xmonad-eval # Broken apparently
+    haskellPackages.xmonad-utils
+
     haskellPackages.xmobar
-    haskellPackages.xmonad-contrib
 
     picom # compositor
     pkgs.xfce.thunar # file browser
+    xfce.thunar-volman
     rofi # program launcher
     lxappearance # theme settings
     nitrogen # background settings
