@@ -43,6 +43,7 @@
         export EDITOR="emacs"
       	alias rebuild='sudo nixos-rebuild switch --upgrade'
     	  alias nixconf='sudo nvim /etc/nixos/configuration.nix'
+        alias nixpurge='sudo nix-collect-garbage --delete-older-than 30d; rebuild'
     	  alias vim='nvim'
     	  alias shutdown='shutdown now'
   '';
