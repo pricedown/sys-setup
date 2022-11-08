@@ -48,6 +48,7 @@
     	  alias shutdown='shutdown now'
   '';
 
+  # Services
   services = {
     locate.enable = true;
     ntp.enable = true;
@@ -167,7 +168,7 @@
     wine
     winetricks
     proton-caller
-    python
+    gnuradio3_8Packages.python
 
     # Primary apps
     alacritty # terminal
