@@ -164,6 +164,9 @@
     winetricks
     proton-caller
     gnuradio3_8Packages.python
+    xorg.xinput
+    xorg.xinit
+    appimage-run
 
     # Primary apps
     alacritty # terminal
