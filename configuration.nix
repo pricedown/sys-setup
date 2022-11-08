@@ -19,7 +19,6 @@
 
   # Networking
   networking.hostName = "jmhi-pc"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -28,10 +27,7 @@
   # Enable networking with nmcli
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
   # Sound
@@ -48,7 +44,6 @@
     	  alias shutdown='shutdown now'
   '';
 
-  # Services
   services = {
     locate.enable = true;
     ntp.enable = true;
@@ -186,7 +181,6 @@
     haskellPackages.xmonad-dbus
     # haskellPackages.xmonad-eval # Broken apparently
     haskellPackages.xmonad-utils
-
     haskellPackages.xmobar
 
     picom # compositor
@@ -230,11 +224,13 @@
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+
+  programs = {
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 
   # List services that you want to enable:

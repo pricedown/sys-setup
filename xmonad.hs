@@ -4,6 +4,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ThreeColumns
 import XMonad.Util.EZConfig
@@ -29,7 +30,8 @@ myConfig =
       borderWidth = 2,
       normalBorderColor = "#504945",
       focusedBorderColor = "#458588",
-      focusFollowsMouse = True
+      focusFollowsMouse = True,
+      startupHook = do spawn "autorandr --change"
     }
     `additionalKeysP` [ ("M-/", spawn "emacs"),
                         ("M-d", spawn "rofi -show run -show-icons")
