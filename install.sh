@@ -5,8 +5,8 @@ yes | ~/.emacs.d/bin/doom install
 
 cd ~/sys-setup
 
-cp -u init.el ~/.doom.d/
-cp -u config.el ~/.doom.d/
+cp init.el ~/.doom.d/
+cp config.el ~/.doom.d/
 mkdir ~/.config/xmonad
 cp -u xmonad.hs ~/.config/xmonad/
 mkdir ~/.config/xmobar
