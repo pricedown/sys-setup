@@ -135,6 +135,7 @@
 
       # Interface
       #ttf_bitstream_vera
+      cantarell-fonts # TODO fuck around with this
       montserrat
       #hack-font
       iosevka
@@ -164,8 +165,9 @@
     libinput
     dbus
     wine
-    # winetricks
+    winetricks
     proton-caller
+    python
 
     # Primary apps
     alacritty # terminal
@@ -195,6 +197,7 @@
     pavucontrol # volume settings
     flameshot # screenshot tool
     slock # display locker
+    autorandr # monitor settings
 
     # Sys tools
     wget

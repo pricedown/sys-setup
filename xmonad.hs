@@ -224,6 +224,7 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
   spawn "xmobar ~/.config/xmobar/xmobarrc"
+  spawn "autorandr --change"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
