@@ -39,7 +39,7 @@
         export EDITOR="emacs"
       	alias rebuild='sudo nixos-rebuild switch --upgrade'
     	  alias nixconf='sudo nvim /etc/nixos/configuration.nix'
-        alias nixpurge='sudo nix-collect-garbage --delete-older-than 30d; rebuild'
+        alias nixpurge='sudo nix-collect-garbage --delete-older-than 10d; rebuild'
     	  alias vim='nvim'
     	  alias shutdown='shutdown now'
   '';
@@ -79,11 +79,7 @@
         awesome.enable = false;
       };
 
-      libinput = {
-        enable = true;
-        # mouse.accelProfile = "flat";
-        # mouse.accelSpeed = "0";
-      };
+      libinput.enable = true;
     };
 
     pipewire = {
@@ -98,7 +94,7 @@
       backend = "glx";
 
       vSync = false;
-      refreshRate = 240; # FIXME deprecated
+      refreshRate = 240; # deprecated
 
       shadow = true;
       shadowOpacity = 0.1;
@@ -123,17 +119,14 @@
 
       # Mono
       jetbrains-mono
-      #fantasque-sans-mono
 
       # Reading
       atkinson-hyperlegible
-      #fira
 
       # Interface
-      #ttf_bitstream_vera
-      cantarell-fonts # TODO fuck around with this
+      ttf_bitstream_vera
       montserrat
-      #hack-font
+      hack-font
       iosevka
       roboto
     ];
@@ -152,41 +145,35 @@
     isNormalUser = true;
     description = "Joseph Isaacs";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
+    packages = with pkgs;
+      [
+        # maybe put something here idk
+      ];
   };
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    # home-manager
-    libinput
-    dbus
-    wine
-    winetricks
-    proton-caller
+    # Stock
+    curl
+    fuse
     gnuradio3_8Packages.python
-    xorg.xinput
-    xorg.xinit
+    sqlite
     appimage-run
+    steam-run
+    gitFull
+    polkit
 
-    # Primary apps
-    alacritty # terminal
+    # Generic Apps
     firefox # browser
-    emacs # editor
-    neovim # fallback editor
     steam # games
+    spotify # music player
     protonvpn-gui # vpn
     transmission-qt # torrent tool
-    ventoy-bin
 
-    # Desktop environment
-    awesome
-    haskellPackages.xmonad
-    haskellPackages.xmonad-dbus
-    # haskellPackages.xmonad-eval # Broken apparently
-    haskellPackages.xmonad-utils
-    haskellPackages.xmobar
-
-    picom # compositor
+    # Desktop Environment
+    alacritty # terminal
+    emacs # editor
+    neovim
     pkgs.xfce.thunar # file browser
     xfce.thunar-volman
     rofi # program launcher
@@ -195,35 +182,58 @@
     pavucontrol # volume settings
     flameshot # screenshot tool
     slock # display locker
-    autorandr # monitor settings
+    autorandr # lazy monitor settings
+    monitor # program monitor
+
+    ## X
+    picom # compositor
+    libinput
+    dbus
+    xorg.xinput
+    xorg.xinit
+    wine
+    winetricks
+    proton-caller
+
+    ## XMonad
+    haskellPackages.xmonad
+    haskellPackages.xmonad-dbus
+    haskellPackages.xmonad-utils
+    haskellPackages.xmobar
 
     # Sys tools
+    sysstat
+    rmlint
+    tmux
+    btop
+    pfetch
     wget
-    tmux # (for ssh)
-    git
-    btop # system monitor
+    gnupg
+    unzip
 
     # Programming
-    rustc
+    ## C and C++
     gcc
-    cargo
+    clang
+    clang-tools
     cmake
     cmake-format
     cmake-language-server
+
+    ## Rust
+    cargo
+    rustc
+    rust-analyzer
+    rustfmt
+
+    ## Haskell
     ghc
     haskellPackages.haskell-language-server
     haskellPackages.hoogle
     cabal-install
-    stack
 
-    rust-analyzer
-    clang
-    clang-tools
-    # emacs28Packages.clang-format
+    ## Nix
     nixfmt
-    rustfmt
-    # nodePackages_latest.lua-fmt
-
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

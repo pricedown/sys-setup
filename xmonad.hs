@@ -1,6 +1,9 @@
+import Graphics.X11.ExtraTypes.XF86
+import System.IO
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.Fullscreen
@@ -36,3 +39,5 @@ myConfig =
     `additionalKeysP` [ ("M-/", spawn "emacs"),
                         ("M-d", spawn "rofi -show run -show-icons")
                       ]
+
+-- TODO Add volume, brightness keys.
