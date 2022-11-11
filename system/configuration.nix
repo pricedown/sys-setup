@@ -15,7 +15,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.grub.configurationLimit = 15;
+  boot.loader.generic-extlinux-compatible.configurationLimit = 8;
 
   # Networking
   networking.hostName = "jmhi-pc"; # Define your hostname.
@@ -92,18 +92,24 @@
     picom = {
       enable = true;
       backend = "glx";
+      experimentalBackends = true;
 
-      vSync = false;
+      vSync = true;
       refreshRate = 240; # deprecated
 
       shadow = true;
       shadowOpacity = 0.1;
       shadowExclude = [ "name ~= 'xmobar'" ];
-
-      fade = false;
-      fadeDelta = 3;
-      fadeSteps = [ 3.0e-2 3.0e-2 ];
       fadeExclude = [ "name ~= 'xmobar'" ];
+
+      fade = true;
+
+      # fadeDelta = 3;
+      # fadeSteps = [ 3.0e-2 3.0e-2 ];
+
+      # Fixes most background flickering
+      fadeDelta = 50;
+      fadeSteps = [ 1.0 1.0 ];
     };
   };
 

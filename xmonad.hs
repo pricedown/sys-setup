@@ -17,7 +17,7 @@ myLayout = smartBorders tiled ||| Mirror tiled ||| fullscreenFocus Full
   where
     tiled = Tall nmaster delta ratio
     nmaster = 1 -- Default number of windows in the master pane
-    ratio = 1 / 2 -- Default proportion of screen occupied by master pane
+    ratio = 59 / 100 -- Default proportion of screen occupied by master pane
     delta = 3 / 100 -- Percent of screen to increment by when resizing panes
 
 main :: IO ()
@@ -34,7 +34,7 @@ myConfig =
       normalBorderColor = "#504945",
       focusedBorderColor = "#458588",
       focusFollowsMouse = True,
-      startupHook = do spawn "autorandr --change"
+      startupHook = do spawn "autorandr --change; nitrogen --restore"
     }
     `additionalKeysP` [ ("M-/", spawn "emacs"),
                         ("M-d", spawn "rofi -show run -show-icons")

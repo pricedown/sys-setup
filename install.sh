@@ -1,7 +1,12 @@
 #!/usr/bin/env sh
-cd
+cd ~
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
+
+mkdir .config
+mkdir Downloads
+mkdir Documents
+mkdir Pictures
 
 cd ~/sys-setup
 
