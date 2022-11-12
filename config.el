@@ -51,6 +51,9 @@ doom-font (font-spec :family "Jetbrains Mono" :size 17 :weight 'medium))
 
 (setq scroll-margin 4)
 
+(add-hook! '(c++-mode-hook rust-mode-hook)
+  (rainbow-delimiters-mode -1)) ;; Disable rainbow delimiters by default on these languages
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
