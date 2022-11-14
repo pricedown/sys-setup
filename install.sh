@@ -10,6 +10,7 @@ mkdir Pictures
 
 cd ~/sys-setup
 
+cp .clang-format ~/
 cp init.el ~/.doom.d/
 cp config.el ~/.doom.d/
 mkdir ~/.config/xmonad
