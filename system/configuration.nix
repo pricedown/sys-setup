@@ -94,6 +94,12 @@
       backend = "glx";
       experimentalBackends = true;
 
+      settings.blur = {
+        method = "gaussian";
+        size = 10;
+        deviation = 5.0;
+      };
+
       vSync = true;
       refreshRate = 240; # deprecated
 
@@ -164,6 +170,7 @@
     curl
     fuse
     gnuradio3_8Packages.python
+    python310Packages.pip
     sqlite
     appimage-run
     steam-run
