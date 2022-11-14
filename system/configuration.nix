@@ -166,7 +166,7 @@
     sqlite
     appimage-run
     steam-run
-    gitFull
+    git
     polkit
 
     # Generic Apps
