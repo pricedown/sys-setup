@@ -47,36 +47,36 @@ Config {
         , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
                              , "--Low"      , "1000"       -- units: B/s
                              , "--High"     , "5000"       -- units: B/s
-                             , "--low"      , "lightblue"
-                             , "--normal"   , "lightgreen"
-                             , "--high"     , "lightyellow"
+                             , "--low"      , "#83a598"
+                             , "--normal"   , "#fe8019"
+                             , "--high"     , "#fb4934"
                              ] 10
 
         -- cpu activity monitor
         , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
-                             , "--low"      , "lightblue"
-                             , "--normal"   , "lightgreen"
-                             , "--high"     , "lightyellow"
+                             , "--low"      , "#83a598"
+                             , "--normal"   , "#fe8019"
+                             , "--high"     , "#fb4934"
                              ] 10
 
         -- cpu core temperature monitor
         , Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
                              , "--Low"      , "70"        -- units: °C
                              , "--High"     , "80"        -- units: °C
-                             , "--low"      , "lightblue"
-                             , "--normal"   , "lightgreen"
-                             , "--high"     , "lightyellow"
+                             , "--low"      , "#83a598"
+                             , "--normal"   , "#fe8019"
+                             , "--high"     , "#fb4934"
                              ] 50
                           
         -- memory usage monitor
         , Run Memory         [ "--template" ,"Mem: <usedratio>%"
                              , "--Low"      , "20"        -- units: %
                              , "--High"     , "90"        -- units: %
-                             , "--low"      , "lightblue"
-                             , "--normal"   , "lightgreen"
-                             , "--high"     , "lightyellow"
+                             , "--low"      , "#83a598"
+                             , "--normal"   , "#fe8019"
+                             , "--high"     , "#fb4934"
                              ] 10
 
         -- battery monitor

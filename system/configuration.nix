@@ -208,6 +208,10 @@
     haskellPackages.xmonad-utils
     haskellPackages.xmobar
 
+    ## Theme
+    gruvbox-dark-gtk
+    gruvbox-dark-icons-gtk
+
     # Sys tools
     sysstat
     rmlint
