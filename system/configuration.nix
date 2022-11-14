@@ -131,6 +131,7 @@
 
       # Interface
       ttf_bitstream_vera
+      source-code-pro
       montserrat
       hack-font
       iosevka
@@ -139,7 +140,7 @@
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Bitstream Vera Serif" ];
+        serif = [ "Atkinson Hyperlegible" ];
         sansSerif = [ "Atkinson Hyperlegible" ];
         monospace = [ "Jetbrains Mono" ];
       };
