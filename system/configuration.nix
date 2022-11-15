@@ -198,6 +198,7 @@
     slock # display locker
     autorandr # lazy monitor settings
     monitor # program monitor
+    speedcrunch # calculator
 
     ## X
     picom # compositor
@@ -228,6 +229,9 @@
     wget
     gnupg
     unzip
+    unrar
+    bc
+    killall
 
     # Programming
     ## C and C++

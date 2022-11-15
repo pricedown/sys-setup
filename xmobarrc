@@ -65,7 +65,7 @@ Config {
         , Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
                              , "--Low"      , "70"        -- units: °C
                              , "--High"     , "80"        -- units: °C
-                             , "--low"      , "#83a598"
+                             , "--low"      , "#fabd2f"
                              , "--normal"   , "#fe8019"
                              , "--high"     , "#fb4934"
                              ] 50
@@ -83,9 +83,9 @@ Config {
         , Run Battery        [ "--template" , "Batt: <acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkred"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkgreen"
+                             , "--low"      , "#fb4934"
+                             , "--normal"   , "#8ec07c"
+                             , "--high"     , "#83a598"
 
                              , "--" -- battery specific options
                                        -- discharging status
