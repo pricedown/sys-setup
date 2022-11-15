@@ -198,7 +198,8 @@
     slock # display locker
     autorandr # lazy monitor settings
     monitor # program monitor
-    speedcrunch # calculator
+    speedcrunch # on the fly calculator
+    qalculate-gtk # advanced calculator
 
     ## X
     picom # compositor

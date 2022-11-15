@@ -24,7 +24,8 @@ myLayout = smartBorders tiled ||| Mirror tiled ||| fullscreenFocus Full
 
 myManageHook =
   composeAll
-    [ className =? "SpeedCrunch" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3))
+    [ className =? "SpeedCrunch" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
+      className =? "Qalculate-gtk" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3))
     ]
 
 main :: IO ()
