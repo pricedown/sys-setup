@@ -24,8 +24,9 @@ myLayout = smartBorders tiled ||| Mirror tiled ||| fullscreenFocus Full
 
 myManageHook =
   composeAll
-    [ className =? "SpeedCrunch" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
-      className =? "Qalculate-gtk" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3))
+    [ className =? "Qalculate-gtk" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
+      className =? "SpeedCrunch" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
+      className =? "Steam" --> doShift "3"
     ]
 
 main :: IO ()
@@ -42,16 +43,20 @@ myConfig =
       normalBorderColor = "#504945",
       focusedBorderColor = "#458588",
       focusFollowsMouse = True,
-      startupHook = do spawn "autorandr --change; nitrogen --restore"
+      startupHook = do spawn "autorandr --change; nitrogen --restore; brightnessctl --restore"
     }
     `additionalKeys` [ ((mod4Mask, xK_d), spawn "rofi -show run -show-icons"),
                        ((mod4Mask, xK_slash), spawn "emacs"),
-                       ((0, xF86XK_Calculator), spawn "pgrep speedcrunch > /dev/null && pkill speedcrunch || setsid speedcrunch & > /dev/null")
+                       ((mod4Mask .|. shiftMask, xK_s), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard"),
+                       -- Full size keyboard functionality
+                       ((0, xF86XK_Calculator), spawn "pgrep qalculate-gtk > /dev/null && pkill qalculate-gtk || setsid qalculate-gtk & > /dev/null"),
+                       ((0, xK_Print), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard"),
+                       ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl s +10% --save"),
+                       ((0, xF86XK_MonBrightnessDown), spawn "brightnessctl s 10%- --save"),
+                       ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 2-"),
+                       ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 2+"),
+                       ((0, xF86XK_AudioMute), spawn "amixer set Master toggle"),
+                       ((0, xF86XK_AudioPlay), spawn "playerctl play-test")
                      ]
 
--- `additionalKeysP` [ ("M-/", spawn "emacs"),
---                     ("M-d", spawn "rofi -show run -show-icons"),
---                     -- ("M-c", spawn "speedcrunch")
---                   ]
-
--- TODO Add volume, brightness keys.
+-- TODO Add volume, brightness keys, secondary printscreen key

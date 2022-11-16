@@ -190,6 +190,7 @@
     neovim
     pkgs.xfce.thunar # file browser
     xfce.thunar-volman
+    xfce.thunar-media-tags-plugin
     rofi # program launcher
     lxappearance # theme settings
     nitrogen # background settings
@@ -200,6 +201,8 @@
     monitor # program monitor
     speedcrunch # on the fly calculator
     qalculate-gtk # advanced calculator
+    brightnessctl # brightness control
+    playerctl # media players
 
     ## X
     picom # compositor
@@ -267,6 +270,7 @@
       enable = true;
       enableSSHSupport = true;
     };
+    sway.wrapperFeatures.base = true;
   };
 
   # List services that you want to enable:
