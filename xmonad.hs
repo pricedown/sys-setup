@@ -47,8 +47,8 @@ myConfig =
     }
     `additionalKeys` [ ((mod4Mask, xK_d), spawn "rofi -show run -show-icons"),
                        ((mod4Mask, xK_slash), spawn "emacs"),
-                       ((mod4Mask .|. shiftMask, xK_s), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard"),
-                       -- Full size keyboard functionality
+                       ((mod4Mask .|. shiftMask, xK_p), spawn "flameshot screen -r --path ~/Pictures/Screenshots --clipboard"),
+                       -- Extra keyboard functionality
                        ((0, xF86XK_Calculator), spawn "pgrep qalculate-gtk > /dev/null && pkill qalculate-gtk || setsid qalculate-gtk & > /dev/null"),
                        ((0, xK_Print), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard"),
                        ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl s +10% --save"),
@@ -56,7 +56,7 @@ myConfig =
                        ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 2-"),
                        ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 2+"),
                        ((0, xF86XK_AudioMute), spawn "amixer set Master toggle"),
-                       ((0, xF86XK_AudioPlay), spawn "playerctl play-test")
+                       ((0, xF86XK_AudioPlay), spawn "playerctl play-pause")
                      ]
 
 -- TODO Add volume, brightness keys, secondary printscreen key

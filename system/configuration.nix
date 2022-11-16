@@ -199,8 +199,7 @@
     slock # display locker
     autorandr # lazy monitor settings
     monitor # program monitor
-    speedcrunch # on the fly calculator
-    qalculate-gtk # advanced calculator
+    qalculate-gtk # calculator
     brightnessctl # brightness control
     playerctl # media players
 
