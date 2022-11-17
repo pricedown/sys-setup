@@ -49,14 +49,14 @@ myConfig =
                        ((mod4Mask, xK_slash), spawn "emacs"),
                        ((mod4Mask .|. shiftMask, xK_p), spawn "flameshot screen -r --path ~/Pictures/Screenshots --clipboard"),
                        -- Extra keyboard functionality
+                       ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+                       ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+                       ((0, xF86XK_AudioPlay), spawn "playerctl play-pause"),
+                       ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%"),
                        ((0, xF86XK_Calculator), spawn "pgrep qalculate-gtk > /dev/null && pkill qalculate-gtk || setsid qalculate-gtk & > /dev/null"),
-                       ((0, xK_Print), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard"),
-                       ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl s +10% --save"),
                        ((0, xF86XK_MonBrightnessDown), spawn "brightnessctl s 10%- --save"),
-                       ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 2-"),
-                       ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 2+"),
-                       ((0, xF86XK_AudioMute), spawn "amixer set Master toggle"),
-                       ((0, xF86XK_AudioPlay), spawn "playerctl play-pause")
+                       ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl s +10% --save"),
+                       ((0, xK_Print), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard")
                      ]
 
 -- TODO Add volume, brightness keys, secondary printscreen key

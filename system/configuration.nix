@@ -197,17 +197,21 @@
     pavucontrol # volume settings
     pkgs.xfce.thunar # file browser
     playerctl # media players
+    pulsemixer # tty volume settings
     qalculate-gtk # calculator
     rofi # program launcher
     slock # display locker
     xfce.thunar-media-tags-plugin
     xfce.thunar-volman
+    xob # volume bar
 
     ## X
     dbus
     libinput
     picom # compositor
+    pipewire
     proton-caller
+    pulseaudio
     wine
     winetricks
     xorg.xinit
