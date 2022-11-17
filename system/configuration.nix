@@ -62,7 +62,7 @@
       displayManager = {
         lightdm.enable = true;
         autoLogin.enable = false;
-        # autoLogin.user = "jmhi";
+        autoLogin.user = "jmhi";
       };
 
       windowManager = {
@@ -70,10 +70,10 @@
           enable = true;
           enableContribAndExtras = true;
           extraPackages = haskellPackages: [
-            haskellPackages.dbus
-            haskellPackages.List
-            haskellPackages.monad-logger
             haskellPackages.xmonad
+            haskellPackages.List
+            haskellPackages.dbus
+            haskellPackages.monad-logger
           ];
         };
         awesome.enable = false;
@@ -128,7 +128,6 @@
 
   fonts = {
     fonts = with pkgs; [
-
       # Mono
       jetbrains-mono
 
@@ -136,12 +135,12 @@
       atkinson-hyperlegible
 
       # Interface
-      ttf_bitstream_vera
-      source-code-pro
-      montserrat
       hack-font
       iosevka
+      montserrat
       roboto
+      source-code-pro
+      ttf_bitstream_vera
     ];
     enableDefaultFonts = true;
     fontconfig = {
@@ -167,74 +166,74 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # Stock
+    appimage-run
     curl
     fuse
+    git
     gnuradio3_8Packages.python
+    polkit
     python310Packages.pip
     sqlite
-    appimage-run
     steam-run
-    git
-    polkit
 
     # Generic Apps
-    firefox # browser
-    steam # games
-    spotify # music player
+    emacs # editor
     protonvpn-gui # vpn
-    transmission-qt # torrent tool
+    spotify # music
+    steam # games
+    transmission-qt # torrent client
+    firefox # browser
 
     # Desktop Environment
     alacritty # terminal
-    emacs # editor
-    neovim
-    pkgs.xfce.thunar # file browser
-    xfce.thunar-volman
-    xfce.thunar-media-tags-plugin
-    rofi # program launcher
+    autorandr # lazy monitor settings
+    brightnessctl # brightness control
+    flameshot # screenshot tool
+    haskellPackages.xmobar # bar
     lxappearance # theme settings
+    monitor # program monitor
+    neovim
     nitrogen # background settings
     pavucontrol # volume settings
-    flameshot # screenshot tool
-    slock # display locker
-    autorandr # lazy monitor settings
-    monitor # program monitor
-    qalculate-gtk # calculator
-    brightnessctl # brightness control
+    pkgs.xfce.thunar # file browser
     playerctl # media players
+    qalculate-gtk # calculator
+    rofi # program launcher
+    slock # display locker
+    xfce.thunar-media-tags-plugin
+    xfce.thunar-volman
 
     ## X
-    picom # compositor
-    libinput
     dbus
-    xorg.xinput
-    xorg.xinit
+    libinput
+    picom # compositor
+    proton-caller
     wine
     winetricks
-    proton-caller
+    xorg.xinit
+    xorg.xinput
 
     ## XMonad
     haskellPackages.xmonad
     haskellPackages.xmonad-dbus
     haskellPackages.xmonad-utils
-    haskellPackages.xmobar
 
     ## Theme
     gruvbox-dark-gtk
     gruvbox-dark-icons-gtk
 
     # Sys tools
-    sysstat
-    rmlint
-    tmux
-    btop
-    pfetch
-    wget
-    gnupg
-    unzip
-    unrar
     bc
+    btop
+    gnupg
     killall
+    pfetch
+    rmlint
+    sysstat
+    tmux
+    unrar
+    unzip
+    wget
 
     # Programming
     ## C and C++
@@ -273,8 +272,6 @@
   };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
