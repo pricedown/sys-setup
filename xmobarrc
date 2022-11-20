@@ -13,7 +13,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }{ %RJTT% | %date% || %kbd% "
+   , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% | %default:Master% }{ %RJTT% | %date% || %kbd% "
 
    -- behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -65,6 +65,9 @@ Config {
                              , "--normal"   , "#fe8019"
                              , "--high"     , "#fb4934"
                              ] 10
+
+        -- volume monitor
+        , Run Volume "default" "Master" [] 10
 
         -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"

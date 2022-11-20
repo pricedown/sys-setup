@@ -15,6 +15,10 @@ import XMonad.StackSet
 import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
 
+-- Mod is super
+myModMask = mod4Mask
+
+-- Layouts
 myLayout = smartBorders tiled ||| Mirror tiled ||| fullscreenFocus Full
   where
     tiled = Tall nmaster delta ratio
@@ -22,10 +26,10 @@ myLayout = smartBorders tiled ||| Mirror tiled ||| fullscreenFocus Full
     ratio = 59 / 100 -- Default proportion of screen occupied by master pane
     delta = 3 / 100 -- Percent of screen to increment by when resizing panes
 
+-- Window rules
 myManageHook =
   composeAll
     [ className =? "Qalculate-gtk" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
-      className =? "SpeedCrunch" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
       className =? "Steam" --> doShift "3"
     ]
 
@@ -34,10 +38,11 @@ main = xmonad $ fullscreenSupportBorder $ ewmhFullscreen $ ewmh $ xmobarProp $ m
 
 myConfig =
   def
-    { modMask = mod4Mask, -- Mod is Super
+    { modMask = myModMask,
       handleEventHook = XMonad.Layout.Fullscreen.fullscreenEventHook,
       manageHook = fullscreenManageHook <+> myManageHook,
       layoutHook = myLayout,
+      logHook = dynamicLog,
       terminal = "alacritty",
       borderWidth = 2,
       normalBorderColor = "#504945",
@@ -45,9 +50,9 @@ myConfig =
       focusFollowsMouse = True,
       startupHook = do spawn "autorandr --change; nitrogen --restore; brightnessctl --restore"
     }
-    `additionalKeys` [ ((mod4Mask, xK_d), spawn "rofi -show run -show-icons"),
-                       ((mod4Mask, xK_slash), spawn "emacs"),
-                       ((mod4Mask .|. shiftMask, xK_p), spawn "flameshot screen -r --path ~/Pictures/Screenshots --clipboard"),
+    `additionalKeys` [ ((myModMask, xK_d), spawn "rofi -show run -show-icons"), -- Run
+                       ((myModMask, xK_slash), spawn "emacs"), -- Start editor
+                       ((myModMask, xK_p), spawn "flameshot screen -r --path ~/Pictures/Screenshots --clipboard"), -- Print
                        -- Extra keyboard functionality
                        ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
                        ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),

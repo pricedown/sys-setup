@@ -76,9 +76,7 @@
             haskellPackages.monad-logger
           ];
         };
-        awesome.enable = false;
       };
-
       libinput.enable = true;
     };
 
