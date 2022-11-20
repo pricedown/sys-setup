@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
+
+sudo cp -u ~/sys-setup/system/configuration.nix /etc/nixos/
+sudo cp -u ~/sys-setup/system/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/
+
 cd ~
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
