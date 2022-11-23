@@ -1,8 +1,5 @@
 Config { 
-
    -- appearance
-     -- font =         "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
-     -- font =         "xft:Source Code Pro:size=10:bold:antialias=true"
     font =         "xft:Jetbrains Mono:size=10:bold:antialias=true"
    , bgColor =      "#1d2021"
    , fgColor =      "#928374"
@@ -68,7 +65,7 @@ Config {
 
         -- battery monitor
         , Run Battery        [ "--template" , "Batt: <acstatus>"
-                             , "--Low"      , "10"        -- units: %
+                             , "--Low"      , "20"        -- units: %
                              , "--High"     , "80"        -- units: %
                              , "--low"      , "#fb4934"
                              , "--normal"   , "#8ec07c"

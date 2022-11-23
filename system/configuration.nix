@@ -17,7 +17,7 @@ in {
     packageOverrides = super:
       let self = super.pkgs;
       in {
-        # NOTE This uses latest nvidia driver
+        # NOTE For using the latest nvidia driver
         linuxPackages = unstable.linuxPackages_latest.extend (self: super: {
           nvidiaPackages = super.nvidiaPackages // {
             stable = unstable.linuxPackages_latest.nvidiaPackages.stable;
@@ -25,17 +25,17 @@ in {
         });
       };
   };
-  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ]; # NOTE Experimental features
 
-  # PERSONALIZE
+  # Personalize:
 
   users.users = {
     jmhi = {
       isNormalUser = true;
       description = "Joseph Isaacs";
       extraGroups = [ "networkmanager" "wheel" ];
-      # User packages
       packages = with pkgs; [
+        # NOTE User packages
         unstable.discord
         unstable.lunar-client
         unstable.protonvpn-gui
@@ -47,7 +47,7 @@ in {
 
   networking = {
     networkmanager.enable = true; # Enable networking with nmcli
-    hostName = "jmhi-pc"; # NOTE hostname
+    hostName = "jmhi-pc"; # NOTE Hostname
 
     proxy = {
       #default = "http://user:password@proxy:port/";
@@ -74,7 +74,7 @@ in {
     	  alias shutdown='shutdown now'
   '';
 
-  # FIX FOR DEVICE
+  # Fix for your device:
 
   hardware = {
     opengl.enable = true;
@@ -86,7 +86,7 @@ in {
     };
   };
 
-  # OPERATE
+  # Operate:
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -115,15 +115,14 @@ in {
       enable = true;
       layout = "us";
       xkbVariant = "";
-      # videoDrivers = [ "nvidia" ]; # NOTE Enable nvidia drivers
+      # videoDrivers = [ "nvidia" ]; # NOTE Enables nvidia drivers
       deviceSection = ''
         Option "TearFree" "true"
       '';
 
       displayManager = {
-        lightdm.enable = true;
-        autoLogin.enable = false;
-        autoLogin.user = "jmhi";
+        gdm.enable = true;
+        # autoLogin.user = "jmhi"; # NOTE autologin
       };
 
       windowManager = {
@@ -142,7 +141,7 @@ in {
           ];
         };
       };
-      libinput.enable = true; # NOTE Slight input lag when true
+      libinput.enable = true; # NOTE Introduces slight input lag when true
     };
 
     pipewire = {
@@ -157,7 +156,7 @@ in {
       backend = "glx";
       experimentalBackends = true; # FIXME deprecated
 
-      vSync = true; # NOTE Caps fps to 144 when true
+      vSync = true; # NOTE Fps capped to 144 for multi monitors when true
       refreshRate = 240; # FIXME deprecated
 
       shadow = true;
@@ -231,7 +230,7 @@ in {
     haskellPackages.xmobar # bar
     lxappearance # theme settings
     monitor # program monitor
-    neovim
+    neovim # fallback editor
     nitrogen # background settings
     pavucontrol # volume settings
     pkgs.xfce.thunar # file browser
