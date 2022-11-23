@@ -148,18 +148,14 @@ in {
       atkinson-hyperlegible
 
       # Interface
-      hack-font
-      iosevka
-      montserrat
-      roboto
+      cantarell-fonts
       source-code-pro
-      ttf_bitstream_vera
     ];
     enableDefaultFonts = true;
     fontconfig = {
       defaultFonts = {
-        serif = [ "Atkinson Hyperlegible" ];
-        sansSerif = [ "Atkinson Hyperlegible" ];
+        serif = [ "Cantarell Regular" ];
+        sansSerif = [ "Cantarell Regular" ];
         monospace = [ "Jetbrains Mono" ];
       };
     };
