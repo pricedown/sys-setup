@@ -28,7 +28,7 @@ Config {
                              ] 36000
 
         -- network activity monitor
-        , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
+        , Run DynNetwork     [ "--template" , "<dev>: ↑<tx>kB/s|↓<rx>kB/s"
                              , "--Low"      , "100000"       -- units: B/s
                              , "--High"     , "5000000"       -- units: B/s
                              , "--low"      , "#83a598"

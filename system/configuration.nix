@@ -40,7 +40,7 @@ in {
       packages = with pkgs; [
         # NOTE User packages
         unstable.discord
-        unstable.protonvpn-gui
+        #unstable.protonvpn-gui
         unstable.spotify
         # Games
         unstable.lunar-client
