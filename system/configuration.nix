@@ -68,7 +68,7 @@ in {
       enable = true;
       layout = "us";
       xkbVariant = "";
-      # videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nvidia" ]; # NOTE Enable nvidia drivers
       deviceSection = ''
         Option "TearFree" "true"
       '';
@@ -95,7 +95,8 @@ in {
           ];
         };
       };
-      libinput.enable = true;
+      libinput.enable =
+        true; # NOTE Slight input lag when enabled over X11 configuration
     };
 
     pipewire = {
@@ -110,7 +111,7 @@ in {
       backend = "glx";
       experimentalBackends = true; # FIXME deprecated
 
-      vSync = true;
+      vSync = true; # NOTE Caps fps to 144 when true
       refreshRate = 240; # FIXME deprecated
 
       shadow = true;
