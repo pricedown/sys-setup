@@ -5,48 +5,64 @@
 { config, pkgs, ... }:
 let
   unstable = import
-    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/master")
-    # reuse the current configuration
-    { config = config.nixpkgs.config; };
+    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/master") {
+      config = config.nixpkgs.config;
+    };
 in {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
+  security.rtkit.enable = true;
+  sound.enable = true;
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    packageOverrides = super:
+      let self = super.pkgs;
+      in {
+        # NOTE This uses latest nvidia driver
+        linuxPackages = unstable.linuxPackages_latest.extend (self: super: {
+          nvidiaPackages = super.nvidiaPackages // {
+            stable = unstable.linuxPackages_latest.nvidiaPackages.stable;
+          };
+        });
+      };
+  };
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  hardware = {
-    opengl.enable = true;
-    opengl.driSupport32Bit = true;
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      modesetting.enable = true;
-      powerManagement.enable = true;
+  # PERSONALIZE
+
+  users.users = {
+    jmhi = {
+      isNormalUser = true;
+      description = "Joseph Isaacs";
+      extraGroups = [ "networkmanager" "wheel" ];
+      # User packages
+      packages = with pkgs; [
+        unstable.discord
+        unstable.lunar-client
+        unstable.protonvpn-gui
+        unstable.spotify
+        unstable.steam
+      ];
     };
   };
 
-  #  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  networking = {
+    networkmanager.enable = true; # Enable networking with nmcli
+    hostName = "jmhi-pc"; # NOTE hostname
 
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.generic-extlinux-compatible.configurationLimit = 8;
+    proxy = {
+      #default = "http://user:password@proxy:port/";
+      #noProxy = "127.0.0.1,localhost,internal.domain";
+    };
 
-  # Networking
-  networking.hostName = "jmhi-pc";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking with nmcli
-  networking.networkmanager.enable = true;
+    firewall = {
+      enable = false;
+      #firewall.allowedTCPPorts = [ ... ];
+      #firewall.allowedUDPPorts = [ ... ];
+    };
+  };
 
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.utf8";
-
-  # Sound
-  sound.enable = true;
-  security.rtkit.enable = true;
 
   # Bashrc
   environment.interactiveShellInit = ''
@@ -58,6 +74,37 @@ in {
     	  alias shutdown='shutdown now'
   '';
 
+  # FIX FOR DEVICE
+
+  hardware = {
+    opengl.enable = true;
+    opengl.driSupport32Bit = true;
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      modesetting.enable = true;
+      powerManagement.enable = true;
+    };
+  };
+
+  # OPERATE
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi";
+    generic-extlinux-compatible.configurationLimit = 8;
+  };
+
+  programs = {
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    sway.wrapperFeatures.base = true;
+  };
+
+  # Services
   services = {
     locate.enable = true;
     ntp.enable = true;
@@ -95,8 +142,7 @@ in {
           ];
         };
       };
-      libinput.enable =
-        true; # NOTE Slight input lag when enabled over X11 configuration
+      libinput.enable = true; # NOTE Slight input lag when true
     };
 
     pipewire = {
@@ -140,6 +186,7 @@ in {
     };
   };
 
+  # Theme
   fonts = {
     fonts = with pkgs; [
       # Mono
@@ -162,37 +209,7 @@ in {
     };
   };
 
-  # User account
-  users.users.jmhi = {
-    isNormalUser = true;
-    description = "Joseph Isaacs";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
-
-  # Packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config = {
-    packageOverrides = super:
-      let self = super.pkgs;
-      in {
-        linuxPackages = unstable.linuxPackages_latest.extend (self: super: {
-          nvidiaPackages = super.nvidiaPackages // {
-            stable = unstable.linuxPackages_latest.nvidiaPackages.stable;
-          };
-        });
-      };
-  };
-
-  ## User packages
-  users.users.jmhi.packages = with pkgs; [
-    unstable.discord
-    unstable.lunar-client
-    unstable.protonvpn-gui
-    unstable.spotify
-    unstable.steam
-  ];
-
-  ## System packages
+  # System packages
   environment.systemPackages = with pkgs; [
     # Stock
     appimage-run
@@ -281,25 +298,6 @@ in {
     ## Nix
     nixfmt
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-
-  programs = {
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    sway.wrapperFeatures.base = true;
-  };
-
-  # List services that you want to enable:
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
