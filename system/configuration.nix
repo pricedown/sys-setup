@@ -3,11 +3,25 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
-{
+let
+  unstable = import
+    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/master")
+    # reuse the current configuration
+    { config = config.nixpkgs.config; };
+in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  hardware = {
+    opengl.enable = true;
+    opengl.driSupport32Bit = true;
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      modesetting.enable = true;
+      powerManagement.enable = true;
+    };
+  };
 
   #  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -18,7 +32,7 @@
   boot.loader.generic-extlinux-compatible.configurationLimit = 8;
 
   # Networking
-  networking.hostName = "jmhi-pc"; # Define your hostname.
+  networking.hostName = "jmhi-pc";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -70,10 +84,14 @@
           enable = true;
           enableContribAndExtras = true;
           extraPackages = haskellPackages: [
-            haskellPackages.xmonad
             haskellPackages.List
+            haskellPackages.X11-xft
+            haskellPackages.alsa-core
+            haskellPackages.alsa-mixer
             haskellPackages.dbus
             haskellPackages.monad-logger
+            haskellPackages.xmonad
+            haskellPackages.xmonad-utils
           ];
         };
       };
@@ -90,16 +108,10 @@
     picom = {
       enable = true;
       backend = "glx";
-      experimentalBackends = true;
-
-      settings.blur = {
-        method = "gaussian";
-        size = 10;
-        deviation = 5.0;
-      };
+      experimentalBackends = true; # FIXME deprecated
 
       vSync = true;
-      refreshRate = 240; # deprecated
+      refreshRate = 240; # FIXME deprecated
 
       shadow = true;
       shadowOpacity = 0.1;
@@ -108,20 +120,23 @@
 
       fade = true;
 
+      # Normal fade
       # fadeDelta = 3;
       # fadeSteps = [ 3.0e-2 3.0e-2 ];
 
-      # Fixes most background flickering
+      # Fix for most background flickering
       fadeDelta = 50;
       fadeSteps = [ 1.0 1.0 ];
-    };
-  };
 
-  hardware = {
-    opengl.enable = true;
-    opengl.driSupport32Bit = true;
-    # nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-    nvidia.modesetting.enable = true;
+      settings = {
+        blur = {
+          method = "gaussian";
+          size = 10;
+          deviation = 5.0;
+        };
+        unrender-if-possible = false;
+      };
+    };
   };
 
   fonts = {
@@ -155,37 +170,49 @@
     isNormalUser = true;
     description = "Joseph Isaacs";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs;
-      [
-        # maybe put something here idk
-      ];
   };
 
+  # Packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    packageOverrides = super:
+      let self = super.pkgs;
+      in {
+        linuxPackages = unstable.linuxPackages_latest.extend (self: super: {
+          nvidiaPackages = super.nvidiaPackages // {
+            stable = unstable.linuxPackages_latest.nvidiaPackages.stable;
+          };
+        });
+      };
+  };
+
+  ## User packages
+  users.users.jmhi.packages = with pkgs; [
+    discord
+    lunar-client
+    protonvpn-gui
+    spotify
+    steam
+  ];
+
+  ## System packages
   environment.systemPackages = with pkgs; [
     # Stock
     appimage-run
     curl
     fuse
     git
-    gnuradio3_8Packages.python
     polkit
-    python310Packages.pip
+    python310
     sqlite
     steam-run
-
-    # Generic Apps
-    emacs # editor
-    protonvpn-gui # vpn
-    spotify # music
-    steam # games
-    transmission-qt # torrent client
-    firefox # browser
 
     # Desktop Environment
     alacritty # terminal
     autorandr # lazy monitor settings
     brightnessctl # brightness control
+    emacs # editor
+    firefox # browser
     flameshot # screenshot tool
     haskellPackages.xmobar # bar
     lxappearance # theme settings
@@ -199,6 +226,7 @@
     qalculate-gtk # calculator
     rofi # program launcher
     slock # display locker
+    transmission-qt # torrent client
     xfce.thunar-media-tags-plugin
     xfce.thunar-volman
     xob # volume bar
@@ -214,11 +242,6 @@
     winetricks
     xorg.xinit
     xorg.xinput
-
-    ## XMonad
-    haskellPackages.xmonad
-    haskellPackages.xmonad-dbus
-    haskellPackages.xmonad-utils
 
     ## Theme
     gruvbox-dark-gtk
