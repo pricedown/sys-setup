@@ -12,12 +12,16 @@ in {
   imports = [ ./hardware-configuration.nix ];
   security.rtkit.enable = true;
   sound.enable = true;
+
+  nix.settings.auto-optimise-store = true;
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ]; # NOTE Experimental features
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config = {
     packageOverrides = super:
       let self = super.pkgs;
       in {
-        # NOTE For using the latest nvidia driver
+        # For using the latest nvidia driver
         linuxPackages = unstable.linuxPackages_latest.extend (self: super: {
           nvidiaPackages = super.nvidiaPackages // {
             stable = unstable.linuxPackages_latest.nvidiaPackages.stable;
@@ -25,9 +29,8 @@ in {
         });
       };
   };
-  # nix.settings.experimental-features = [ "nix-command" "flakes" ]; # NOTE Experimental features
 
-  # Personalize:
+  # Personalize
 
   users.users = {
     jmhi = {
@@ -37,9 +40,11 @@ in {
       packages = with pkgs; [
         # NOTE User packages
         unstable.discord
-        unstable.lunar-client
         unstable.protonvpn-gui
         unstable.spotify
+        # Games
+        unstable.lunar-client
+        unstable.lutris
         unstable.steam
       ];
     };
@@ -74,7 +79,7 @@ in {
     	  alias shutdown='shutdown now'
   '';
 
-  # Fix for your device:
+  # Fix for your device
 
   hardware = {
     opengl.enable = true;
@@ -86,7 +91,14 @@ in {
     };
   };
 
-  # Operate:
+  # Operate
+
+  #automatic garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   boot.loader = {
     systemd-boot.enable = true;

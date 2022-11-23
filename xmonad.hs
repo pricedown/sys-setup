@@ -30,7 +30,9 @@ myLayout = smartBorders tiled ||| Mirror tiled ||| fullscreenFocus Full
 myManageHook =
   composeAll
     [ className =? "Qalculate-gtk" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
-      className =? "Steam" --> doShift "3"
+      className =? "Steam" --> doShift "3",
+      className =? "Discord" --> doShift "2",
+      className =? "Firefox" --> doShift "2"
     ]
 
 main :: IO ()
@@ -63,5 +65,3 @@ myConfig =
                        ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl s +10% --save"),
                        ((0, xK_Print), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard")
                      ]
-
--- TODO Add volume, brightness keys, secondary printscreen key
