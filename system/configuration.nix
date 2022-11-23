@@ -188,11 +188,11 @@ in {
 
   ## User packages
   users.users.jmhi.packages = with pkgs; [
-    discord
-    lunar-client
-    protonvpn-gui
-    spotify
-    steam
+    unstable.discord
+    unstable.lunar-client
+    unstable.protonvpn-gui
+    unstable.spotify
+    unstable.steam
   ];
 
   ## System packages
