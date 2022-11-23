@@ -41,6 +41,7 @@ in {
         # NOTE User packages
         unstable.discord
         #unstable.protonvpn-gui
+        unstable.protonvpn-cli
         unstable.spotify
         # Games
         unstable.lunar-client
