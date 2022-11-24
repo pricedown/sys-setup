@@ -228,6 +228,7 @@ in {
     curl
     fuse
     git
+    gvfs
     polkit
     python310
     sqlite
