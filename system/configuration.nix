@@ -80,7 +80,7 @@ in {
     	  alias shutdown='shutdown now'
   '';
 
-  # Fix for your device
+  # Fix for device
 
   hardware = {
     opengl.enable = true;
@@ -92,7 +92,7 @@ in {
     };
   };
 
-  # Operate
+  # Tweak
 
   #automatic garbage collection
   nix.gc = {

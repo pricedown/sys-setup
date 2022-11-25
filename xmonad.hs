@@ -31,6 +31,7 @@ myManageHook =
   composeAll
     [ className =? "Qalculate-gtk" --> doRectFloat (RationalRect (1 / 3) (1 / 3) (1 / 3) (1 / 3)),
       className =? "Steam" --> doShift "3",
+      className =? "Lutris" --> doShift "3",
       -- className =? "Navigator" --> doShift "2",
       className =? "Discord" --> doShift "2"
     ]
