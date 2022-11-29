@@ -36,13 +36,9 @@ in {
     nvidia = {
       # NOTE Nvidia driver version
       package =
-        unstable.linuxPackages.nvidiaPackages.production;
+        config.boot.kernelPackages.nvidiaPackages.production;
       modesetting.enable = true;
-      powerManagement.enable = true;
-      optimus_prime = {
-        enable = false; # NOTE GPU resource management for laptops
-        nvidiaBusId = "PCI:1:0:0"; # TODO find out what this is
-      };
+      powerManagement.enable = true; # NOTE Power management
     };
   };
 
@@ -114,6 +110,8 @@ in {
   # Tweak system #
   ################
 
+  documentation.nixos.enable = true;
+
   programs = {
     mtr.enable = true;
     gnupg.agent = {
@@ -127,7 +125,6 @@ in {
   services = {
     devmon.enable = true;
     locate.enable = true;
-    nixosManual.enable = true;
     ntp.enable = true;
     openssh.enable = true;
 
