@@ -38,4 +38,4 @@ cp -u gruv.rasi ~/.config/rofi/
 mkdir ~/.config/alacritty
 cp -u alacritty.yml ~/.config/alacritty/
 
-echo "Adjust the nixos configuration and then use 'sudo nixos-rebuild switch' and reboot to complete the installation."
+echo "Adjust the nixos configuration and then use 'sudo nixos-rebuild switch' and reboot to complete."

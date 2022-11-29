@@ -53,10 +53,10 @@ myConfig =
       focusFollowsMouse = True,
       startupHook = do spawn "autorandr --change; nitrogen --restore; brightnessctl --restore"
     }
-    `additionalKeys` [ ((myModMask, xK_d), spawn "rofi -show run -show-icons"), -- Run
-                       ((myModMask, xK_slash), spawn "emacs"), -- Start editor
-                       ((myModMask, xK_p), spawn "flameshot screen -r --path ~/Pictures/Screenshots --clipboard"), -- Print
-                       -- Extra keyboard functionality
+    `additionalKeys` [ ((myModMask, xK_d), spawn "rofi -show run -show-icons"), -- Mod d => Run program
+                       ((myModMask, xK_slash), spawn "emacs"), -- Mod / => Open editor
+                       ((myModMask .|. shiftMask, xK_p), spawn "flameshot screen -r --path ~/Pictures/Screenshots --clipboard"), -- Mod Shift P => Screenshot desktop
+                       -- Large keyboard functionality
                        ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
                        ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
                        ((0, xF86XK_AudioPlay), spawn "playerctl play-pause"),

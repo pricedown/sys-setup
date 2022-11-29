@@ -36,9 +36,13 @@ in {
     nvidia = {
       # NOTE Nvidia driver version
       package =
-        pkgs.legacyPackages.x86_64-linux.linuxPackages_latest.nvidia_x11_production;
+        unstable.linuxPackages.nvidiaPackages.production;
       modesetting.enable = true;
       powerManagement.enable = true;
+      optimus_prime = {
+        enable = false; # NOTE GPU resource management for laptops
+        nvidiaBusId = "PCI:1:0:0"; # TODO find out what this is
+      };
     };
   };
 
@@ -121,16 +125,17 @@ in {
 
   # Services
   services = {
+    devmon.enable = true;
     locate.enable = true;
+    nixosManual.enable = true;
     ntp.enable = true;
     openssh.enable = true;
-    devmon.enable = true;
 
     xserver = {
       enable = true;
       layout = "us";
       xkbVariant = "";
-      # videoDrivers = [ "nvidia" ]; # NOTE Enables nvidia drivers
+      videoDrivers = [ "nvidia" ]; # NOTE Enables nvidia drivers
       deviceSection = ''
         Option "TearFree" "true"
       '';
@@ -231,6 +236,7 @@ in {
     fuse
     git
     gvfs
+    man
     polkit
     python310
     sqlite
@@ -279,6 +285,7 @@ in {
     # Sys tools
     bc
     btop
+    busybox
     gnupg
     killall
     pfetch
