@@ -9,47 +9,58 @@ let
       config = config.nixpkgs.config;
     };
 in {
+  #########
+  # Stock #
+  #########
+
   imports = [ ./hardware-configuration.nix ];
-  security.rtkit.enable = true;
-  sound.enable = true;
-
-  nix.settings.auto-optimise-store = true;
-  # nix.settings.experimental-features = [ "nix-command" "flakes" ]; # NOTE Experimental features
-
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config = {
-    packageOverrides = super:
-      let self = super.pkgs;
-      in {
-        # For using the latest nvidia driver
-        linuxPackages = unstable.linuxPackages_latest.extend (self: super: {
-          nvidiaPackages = super.nvidiaPackages // {
-            stable = unstable.linuxPackages_latest.nvidiaPackages.stable;
-          };
-        });
-      };
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" "flakes" ]; # Experimental features
+  };
+  nix.gc = { # Garbage collector
+    automatic = true; # Enables automatic garbage collection
+    dates = "weekly";
+    options = "--delete-older-than 30d";
   };
 
-  # Personalize
+  nixpkgs.config.allowUnfree = true; # NOTE Allow unfree software
 
-  users.users = {
-    jmhi = {
-      isNormalUser = true;
-      description = "Joseph Isaacs";
-      extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [
-        # NOTE User packages
-        unstable.discord
-        #unstable.protonvpn-gui
-        unstable.protonvpn-cli
-        unstable.spotify
-        # Games
-        unstable.lunar-client
-        unstable.lutris
-        unstable.steam
-      ];
+  ##################
+  # Fix for device #
+  ##################
+
+  hardware = {
+    opengl.enable = true;
+    opengl.driSupport32Bit = true;
+    nvidia = {
+      # NOTE Nvidia driver version
+      package =
+        pkgs.legacyPackages.x86_64-linux.linuxPackages_latest.nvidia_x11_production;
+      modesetting.enable = true;
+      powerManagement.enable = true;
     };
   };
+
+  boot = {
+    kernelPackages = unstable.linuxPackages_latest; # Kernel packages version
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot/efi";
+      generic-extlinux-compatible.configurationLimit = 8;
+    };
+  };
+
+  sound.enable = true;
+  security = { rtkit.enable = true; };
+
+  ###############
+  # Personalize #
+  ###############
+
+  time.timeZone = "America/New_York";
+  i18n.defaultLocale = "en_US.utf8";
 
   networking = {
     networkmanager.enable = true; # Enable networking with nmcli
@@ -67,10 +78,25 @@ in {
     };
   };
 
-  time.timeZone = "America/New_York";
-  i18n.defaultLocale = "en_US.utf8";
+  users.users = {
+    jmhi = {
+      isNormalUser = true;
+      description = "Joseph Isaacs";
+      extraGroups = [ "networkmanager" "wheel" ];
+      # NOTE User packages
+      packages = with pkgs; [
+        unstable.discord
+        #unstable.protonvpn-gui
+        unstable.protonvpn-cli
+        unstable.spotify
+        # Games
+        unstable.lunar-client
+        unstable.lutris
+        unstable.steam
+      ];
+    };
+  };
 
-  # Bashrc
   environment.interactiveShellInit = ''
         export EDITOR="emacs"
       	alias rebuild='sudo nixos-rebuild switch --upgrade'
@@ -80,33 +106,9 @@ in {
     	  alias shutdown='shutdown now'
   '';
 
-  # Fix for device
-
-  hardware = {
-    opengl.enable = true;
-    opengl.driSupport32Bit = true;
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      modesetting.enable = true;
-      powerManagement.enable = true;
-    };
-  };
-
-  # Tweak
-
-  #automatic garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot/efi";
-    generic-extlinux-compatible.configurationLimit = 8;
-  };
+  ################
+  # Tweak system #
+  ################
 
   programs = {
     mtr.enable = true;
@@ -134,8 +136,8 @@ in {
       '';
 
       displayManager = {
-        gdm.enable = true;
-        # autoLogin.user = "jmhi"; # NOTE autologin
+        gdm.enable = true; # Lightdm is still kinda broken
+        # autoLogin.user = "jmhi"; # NOTE Enables autologin
       };
 
       windowManager = {
@@ -198,7 +200,7 @@ in {
     };
   };
 
-  # Theme
+  # DE Theming
   fonts = {
     fonts = with pkgs; [
       # Mono
