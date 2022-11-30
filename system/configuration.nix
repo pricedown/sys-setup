@@ -21,7 +21,7 @@ in {
   nix.gc = { # Garbage collector
     automatic = true; # Enables automatic garbage collection
     dates = "weekly";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 7d";
   };
 
   nixpkgs.config.allowUnfree = true; # NOTE Allow unfree software
@@ -36,7 +36,7 @@ in {
     nvidia = {
       # NOTE Nvidia driver version
       package =
-        config.boot.kernelPackages.nvidiaPackages.production;
+        config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
       powerManagement.enable = true; # NOTE Power management
     };
@@ -99,11 +99,11 @@ in {
 
   environment.interactiveShellInit = ''
         export EDITOR="emacs"
-      	alias rebuild='sudo nixos-rebuild switch --upgrade'
-    	  alias nixconf='sudo nvim /etc/nixos/configuration.nix'
-        alias nixpurge='sudo nix-collect-garbage --delete-older-than 10d; rebuild'
-    	  alias vim='nvim'
-    	  alias shutdown='shutdown now'
+        alias rebuild='sudo nixos-rebuild switch --upgrade'
+        alias nixconf='sudo nvim /etc/nixos/configuration.nix'
+        alias nixpurge='sudo nix-collect-garbage --delete-older-than 2d; rebuild'
+        alias vim='nvim'
+        alias shutdown='shutdown now'
   '';
 
   ################
@@ -111,6 +111,8 @@ in {
   ################
 
   documentation.nixos.enable = true;
+  documentation.man.enable = true;
+  documentation.dev.enable = true;
 
   programs = {
     mtr.enable = true;
@@ -132,7 +134,7 @@ in {
       enable = true;
       layout = "us";
       xkbVariant = "";
-      videoDrivers = [ "nvidia" ]; # NOTE Enables nvidia drivers
+      # videoDrivers = [ "nvidia" ]; # NOTE Enables nvidia drivers
       deviceSection = ''
         Option "TearFree" "true"
       '';
