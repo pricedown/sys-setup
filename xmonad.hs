@@ -51,7 +51,7 @@ myConfig =
       normalBorderColor = "#504945",
       focusedBorderColor = "#458588",
       focusFollowsMouse = True,
-      startupHook = do spawn "autorandr --change; nitrogen --restore; brightnessctl --restore"
+      startupHook = do spawn "autorandr --change; nitrogen --restore; brightnessctl --restore; tail -f ~/.config/xob/xobpipe | xob"
     }
     `additionalKeys` [ ((myModMask, xK_d), spawn "rofi -show run -show-icons"), -- Mod d => Run program
                        ((myModMask, xK_slash), spawn "emacs"), -- Mod / => Open editor

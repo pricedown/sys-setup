@@ -110,10 +110,6 @@ in {
   # Tweak system #
   ################
 
-  documentation.nixos.enable = true;
-  documentation.man.enable = true;
-  documentation.dev.enable = true;
-
   programs = {
     mtr.enable = true;
     gnupg.agent = {
@@ -230,6 +226,7 @@ in {
   # System packages
   environment.systemPackages = with pkgs; [
     # Stock
+    alsa-utils
     appimage-run
     curl
     fuse
@@ -240,6 +237,7 @@ in {
     python310
     sqlite
     steam-run
+    # microsoft-edge # NOTE **>>>MICROSOFT EDGE, THE BEST WEB BROWSER<<<**
 
     # Desktop Environment
     alacritty # terminal
@@ -248,22 +246,21 @@ in {
     emacs # editor
     firefox # browser
     flameshot # screenshot tool
-    haskellPackages.xmobar # bar
+    haskellPackages.xmobar # status bar
     lxappearance # theme settings
     monitor # program monitor
     neovim # fallback editor
     nitrogen # background settings
     pavucontrol # volume settings
-    pkgs.xfce.thunar # file browser
     playerctl # media players
     pulsemixer # tty volume settings
     qalculate-gtk # calculator
     rofi # program launcher
     slock # display locker
     transmission-qt # torrent client
+    xfce.thunar # file browser
     xfce.thunar-media-tags-plugin
     xfce.thunar-volman
-    xob # volume bar
 
     ## X
     dbus
@@ -284,7 +281,6 @@ in {
     # Sys tools
     bc
     btop
-    busybox
     gnupg
     killall
     pfetch
@@ -312,9 +308,9 @@ in {
 
     ## Haskell
     ghc
+    cabal-install
     haskellPackages.haskell-language-server
     haskellPackages.hoogle
-    cabal-install
 
     ## Nix
     nixfmt
