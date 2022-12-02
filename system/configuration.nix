@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   unstable = import
-    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/master") {
+    (builtins.fetchTarball "https://github.com/nixos/nixpkgs/tarball/nixos-unstable") {
       config = config.nixpkgs.config;
     };
 in {
@@ -169,10 +169,8 @@ in {
     picom = {
       enable = true;
       backend = "glx";
-      experimentalBackends = true; # FIXME deprecated
 
       vSync = true; # NOTE Fps capped to 144 for multi monitors when true
-      refreshRate = 240; # FIXME deprecated
 
       shadow = true;
       shadowOpacity = 0.1;
