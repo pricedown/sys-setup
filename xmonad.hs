@@ -66,3 +66,5 @@ myConfig =
                        ((0, xF86XK_MonBrightnessUp), spawn "brightnessctl s +10% --save"),
                        ((0, xK_Print), spawn "flameshot full --path ~/Pictures/Screenshots --clipboard")
                      ]
+
+-- TODO super-z, super-x to switch workspaces?

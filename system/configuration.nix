@@ -2,6 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+# FIXME Current gripes:
+# - 'man configuration.nix` no longer works
+# - Laptop still blackscreens when I enable its nvidia drivers
+
 { config, pkgs, ... }:
 let
   unstable = import
@@ -86,8 +90,8 @@ in {
       # NOTE User packages
       packages = with pkgs; [
         unstable.discord
-        #unstable.protonvpn-gui
         unstable.protonvpn-cli
+        unstable.protonvpn-gui
         unstable.spotify
         # Games
         unstable.lunar-client
@@ -104,12 +108,18 @@ in {
         alias nixpurge='sudo nix-collect-garbage --delete-older-than 2d; rebuild'
         alias vim='nvim'
         alias shutdown='shutdown now'
+        alias reboot='systemctl reboot'
   '';
 
   ################
   # Tweak system #
   ################
 
+  documentation.dev.enable = true;
+  documentation.man.enable = true;
+  documentation.man.generateCaches = true;
+  documentation.nixos.enable = true;
+  
   programs = {
     mtr.enable = true;
     gnupg.agent = {
@@ -136,6 +146,7 @@ in {
       '';
 
       displayManager = {
+        # lightdm.enable = true;
         gdm.enable = true; # Lightdm is still kinda broken
         # autoLogin.user = "jmhi"; # NOTE Enables autologin
       };
@@ -151,6 +162,7 @@ in {
             haskellPackages.alsa-mixer
             haskellPackages.dbus
             haskellPackages.monad-logger
+            haskellPackages.stack
             haskellPackages.xmonad
             haskellPackages.xmonad-utils
           ];
@@ -235,7 +247,7 @@ in {
     python310
     sqlite
     steam-run
-    # microsoft-edge # NOTE **>>>MICROSOFT EDGE, THE BEST WEB BROWSER<<<**
+    # microsoft-edge # NOTE **>>>MICROSOFT EDGE, BESTEST PREMIUM WEB BROWSER<<<**
 
     # Desktop Environment
     alacritty # terminal
@@ -262,6 +274,7 @@ in {
 
     ## X
     dbus
+    gtk3
     libinput
     picom # compositor
     pipewire
@@ -269,6 +282,7 @@ in {
     pulseaudio
     wine
     winetricks
+    xorg.libXft
     xorg.xinit
     xorg.xinput
 
@@ -307,6 +321,7 @@ in {
     ## Haskell
     ghc
     cabal-install
+    stack
     haskellPackages.haskell-language-server
     haskellPackages.hoogle
 
