@@ -90,10 +90,9 @@ in {
       # NOTE User packages
       packages = with pkgs; [
         unstable.discord
-        unstable.protonvpn-cli
         unstable.protonvpn-gui
         unstable.spotify
-        # Games
+        # Game platforms
         unstable.lunar-client
         unstable.lutris
         unstable.steam
@@ -115,11 +114,13 @@ in {
   # Tweak system #
   ################
 
-  documentation.dev.enable = true;
-  documentation.man.enable = true;
-  documentation.man.generateCaches = true;
-  documentation.nixos.enable = true;
-  
+  documentation = {
+    dev.enable = true;
+    man.enable = true;
+    man.generateCaches = true;
+    nixos.enable = true;
+  };
+
   programs = {
     mtr.enable = true;
     gnupg.agent = {
@@ -129,7 +130,6 @@ in {
     sway.wrapperFeatures.base = true;
   };
 
-  # Services
   services = {
     devmon.enable = true;
     locate.enable = true;
@@ -252,11 +252,11 @@ in {
     # Desktop Environment
     alacritty # terminal
     autorandr # lazy monitor settings
-    brightnessctl # brightness control
     emacs # editor
     firefox # browser
     flameshot # screenshot tool
     haskellPackages.xmobar # status bar
+    brightnessctl # brightness control
     lxappearance # theme settings
     monitor # program monitor
     neovim # fallback editor
