@@ -5,6 +5,7 @@
 # FIXME Current gripes:
 # - 'man configuration.nix` no longer works
 # - Laptop still blackscreens when I enable its nvidia drivers
+# - TODO Unnest some stuff and put it towards the front to make it more convenient
 
 { config, pkgs, ... }:
 let
@@ -63,6 +64,8 @@ in {
   # Personalize #
   ###############
 
+  # displayManager.autoLogin.user = "jmhi" # NOTE enables autologin
+
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.utf8";
 
@@ -101,13 +104,20 @@ in {
   };
 
   environment.interactiveShellInit = ''
+        #   Environment variables
         export EDITOR="emacs"
+        # Aliases
+        ##  Nixos shorthands
+        alias configure='sudo nvim /etc/nixos/configuration.nix'
+        alias garbage='sudo nix-collect-garbage --delete-older-than 2d; rebuild'
         alias rebuild='sudo nixos-rebuild switch --upgrade'
-        alias nixconf='sudo nvim /etc/nixos/configuration.nix'
-        alias nixpurge='sudo nix-collect-garbage --delete-older-than 2d; rebuild'
-        alias vim='nvim'
+        ##  System shorthands
         alias shutdown='shutdown now'
         alias reboot='systemctl reboot'
+        ##  Program shorthands
+        alias vim='nvim'
+        alias fetch='pfetch'
+        alias emacs="emacs -nw"
   '';
 
   ################
@@ -148,7 +158,6 @@ in {
       displayManager = {
         # lightdm.enable = true;
         gdm.enable = true; # Lightdm is still kinda broken
-        # autoLogin.user = "jmhi"; # NOTE Enables autologin
       };
 
       windowManager = {
@@ -178,6 +187,7 @@ in {
       alsa.support32Bit = true;
       jack.enable = true;
     };
+
     picom = {
       enable = true;
       backend = "glx";
