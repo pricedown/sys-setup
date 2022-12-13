@@ -250,6 +250,8 @@ in {
   # System packages
   environment.systemPackages = with pkgs; [
     # Stock
+    alsa-lib
+    alsa-tools
     alsa-utils
     appimage-run
     curl

@@ -73,7 +73,7 @@ Config {
                              ] 50
 
         -- Volume
-        , Run Volume "default" "Master" [] 5
+        , Run Volume "default" "Master" [ "-c", "#98971a"] 5
 
         -- time and date indicator
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
