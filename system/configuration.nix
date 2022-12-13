@@ -65,8 +65,6 @@ in {
   # Personalize #
   ###############
 
-  # displayManager.autoLogin.user = "jmhi" # NOTE enables autologin
-
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.utf8";
 
@@ -162,6 +160,9 @@ in {
       displayManager = {
         # lightdm.enable = true;
         gdm.enable = true; # Lightdm is still kinda broken
+
+        autoLogin.user = "jmhi";
+        autoLogin.enable = false; # NOTE Enables autologin
       };
 
       windowManager = {
