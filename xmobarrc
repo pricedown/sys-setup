@@ -37,15 +37,6 @@ Config {
                              , "--high"     , "#fb4934"
                              ] 10
 
-        -- cpu activity monitor
-        , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
-                             , "--Low"      , "50"         -- units: %
-                             , "--High"     , "85"         -- units: %
-                             , "--low"      , "#83a598"
-                             , "--normal"   , "#fe8019"
-                             , "--high"     , "#fb4934"
-                             ] 10
-
         -- cpu core temperature monitor
         , Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
                              , "--Low"      , "70"        -- units: °C
@@ -82,7 +73,7 @@ Config {
                              ] 50
 
         -- Volume
-        -- , Run Volume "default" "Master" [] 50
+        , Run Volume "default" "Master" [] 5
 
         -- time and date indicator
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)

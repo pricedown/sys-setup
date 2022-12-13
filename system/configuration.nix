@@ -48,6 +48,7 @@ in {
   };
 
   boot = {
+    plymouth.enable = true; # Hides the systemd spam behind a loading screen
     kernelPackages = unstable.linuxPackages_latest; # Kernel packages version
     loader = {
       systemd-boot.enable = true;
@@ -91,14 +92,17 @@ in {
       description = "Joseph Isaacs";
       extraGroups = [ "networkmanager" "wheel" ];
       # NOTE User packages
-      packages = with pkgs; [
-        unstable.discord
-        unstable.protonvpn-gui
-        unstable.spotify
+      packages = with unstable; [
+        discord
+        protonvpn-gui
+        spotify
+        wootility
+        wooting-udev-rules
         # Game platforms
-        unstable.lunar-client
-        unstable.lutris
-        unstable.steam
+        lunar-client
+        lutris
+        steam
+        steam-run
       ];
     };
   };
@@ -256,8 +260,7 @@ in {
     polkit
     python310
     sqlite
-    steam-run
-    # microsoft-edge # NOTE **>>>MICROSOFT EDGE, BESTEST PREMIUM WEB BROWSER<<<**
+    # microsoft-edge # NOTE **>>>MICROSOFT EDGE, BEST PREMIUM WEB BROWSER<<<**
 
     # Desktop Environment
     alacritty # terminal
