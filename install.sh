@@ -9,6 +9,7 @@ sudo cp -u ~/sys-setup/system/configuration.nix /etc/nixos/
 sudo mkdir /etc/X11
 sudo mkdir /etc/X11/xorg.conf.d
 sudo cp -u ~/sys-setup/system/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/
+sudo chmod +x /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
 # Install home
 cd ~
